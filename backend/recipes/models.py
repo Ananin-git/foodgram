@@ -2,7 +2,6 @@ from django.contrib.auth.models import AbstractUser
 from django.core.validators import MinValueValidator, RegexValidator
 from django.db import models
 
-
 AMOUNT_MIN_VALUE = 1
 MIN_COOCKING_TIME = 1
 
@@ -147,7 +146,7 @@ class Recipe(models.Model):
     ingredients = models.ManyToManyField(
         Ingredient,
         through='RecipeIngredient',
-        verbose_name='Продукты'
+        verbose_name='Ингридиенты'
     )
     tags = models.ManyToManyField(
         Tag,
@@ -176,7 +175,7 @@ class Recipe(models.Model):
 
 class RecipeIngredient(models.Model):
     """
-    Связующая модель для отношения "многие ко многим" между Recipe и Ingredient.
+    Модель для отношения "многие ко многим" между Recipe и Ingredient.
     """
 
     recipe = models.ForeignKey(
@@ -188,7 +187,7 @@ class RecipeIngredient(models.Model):
     ingredient = models.ForeignKey(
         Ingredient,
         on_delete=models.CASCADE,
-        verbose_name='Продукт',
+        verbose_name='Ингридиент',
         help_text='Укажите ингредиенты'
     )
     amount = models.PositiveSmallIntegerField(
@@ -202,8 +201,8 @@ class RecipeIngredient(models.Model):
     )
 
     class Meta:
-        verbose_name = 'Продукт в рецепте',
-        verbose_name_plural = 'Продукты в рецептах',
+        verbose_name = 'Ингридиент в рецепте',
+        verbose_name_plural = 'Ингридиенты в рецептах',
         default_related_name = 'recipe_ingredients'
         constraints = (
             models.UniqueConstraint(

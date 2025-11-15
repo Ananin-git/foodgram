@@ -7,6 +7,10 @@ RECIPE_TEMPLATE = "{index}) {name}"
 
 
 def shopping_cart(filling_basket):
+    """
+    Генерирует список покупок на основе данных о заполнении корзины.
+    """
+
     header = HEADER_TEMPLATE.format(date=date.today().strftime('%d.%m.%Y'))
     ingredient_groups = defaultdict(lambda: 0)
     recipes = set()
@@ -31,6 +35,7 @@ def shopping_cart(filling_basket):
             sorted_ingredients, start=1
         )
     ]
+
     recipes_list = [
         RECIPE_TEMPLATE.format(index=index, name=recipe)
         for index, recipe in enumerate(sorted(recipes), start=1)

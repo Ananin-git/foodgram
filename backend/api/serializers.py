@@ -1,17 +1,10 @@
-from djoser.serializers import (
-    UserSerializer
-)
+from djoser.serializers import UserSerializer
 from drf_extra_fields.fields import Base64ImageField
+from recipes.models import (FavoriteRecipes, Ingredient, Recipe,
+                            RecipeIngredient, ShoppingList, Subscriptions, Tag,
+                            User)
 from rest_framework import serializers
 from rest_framework.exceptions import ValidationError
-
-from recipes.models import (
-    FavoriteRecipes, Ingredient,
-    RecipeIngredient, Recipe,
-    ShoppingList, Subscriptions,
-    Tag, User
-)
-
 
 MIN_AMOUNT = 1
 

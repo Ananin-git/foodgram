@@ -1,16 +1,12 @@
 from django import forms
 from django.contrib import admin
 from django.contrib.auth.models import Group
-from django.db.models import F, Value, CharField, Q
+from django.db.models import CharField, F, Q, Value
 from django.db.models.functions import Concat
 from django.utils.safestring import mark_safe
 
-from .models import (
-    FavoriteRecipes, Ingredient,
-    Recipe, RecipeIngredient,
-    ShoppingList, Subscriptions,
-    Tag, User
-)
+from .models import (FavoriteRecipes, Ingredient, Recipe, RecipeIngredient,
+                     ShoppingList, Subscriptions, Tag, User)
 
 
 class RecipeIngredientInlineForm(forms.ModelForm):
@@ -72,7 +68,8 @@ class CookingTimeFilter(admin.SimpleListFilter):
         ranges = [
             ((0, medium_threshold), f'Быстро (< {int(medium_threshold)} мин)'),
             ((medium_threshold, long_threshold),
-             f'Средне (от {int(medium_threshold)} до {int(long_threshold)} мин)'),
+             f'Средне (от {int(medium_threshold)}'
+             'до {int(long_threshold)} мин)'),
             ((long_threshold, maximum_time + 1),
              f'Долго (> {int(long_threshold)} мин)'),
         ]
@@ -120,7 +117,7 @@ class RecipeAdmin(admin.ModelAdmin):
     def get_image(self, recipe):
         return (
             mark_safe(f'<img src="{recipe.image.url}" '
-                      f'style="max-width: 200px; max-height: 200px;" />')
+                      f'style="max-width: 200px; max-height: 200px; " />')
             if recipe.image
             else ''
         )
@@ -180,7 +177,7 @@ class FoodgramUserAdmin(admin.ModelAdmin):
     def avatar_display(self, user):
         return mark_safe(
             f'<img src="{user.avatar.url}" '
-            f'style="max-width: 50px; max-height: 50px;" />'
+            f'style="max-width: 50px; max-height: 50px; " />'
         ) if user.avatar else ''
 
     @admin.display(description='Рецепты')
