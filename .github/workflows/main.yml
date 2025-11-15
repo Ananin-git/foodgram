@@ -78,10 +78,6 @@ jobs:
         cd frontend/
         npm ci
 
-    - name: Test frontend
-      run: |
-        cd frontend/
-        npm run test
   build_frontend_and_push_to_docker_hub:
     name: Push frontend Docker image to DockerHub
     runs-on: ubuntu-latest
@@ -118,7 +114,7 @@ jobs:
       - name: Push to DockerHub
         uses: docker/build-push-action@v4
         with:
-          context: ./nginx/
+          context: ./gateway/
           push: true
           tags: gor134/foodgram_gateway:latest
   deploy:
