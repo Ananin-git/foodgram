@@ -85,8 +85,8 @@ class Ingredient(models.Model):
 
     class Meta:
         ordering = ('name',)
-        verbose_name = 'Продукт'
-        verbose_name_plural = 'Продукты'
+        verbose_name = 'Ингридиент'
+        verbose_name_plural = 'Ингридиенты'
         constraints = (
             models.UniqueConstraint(
                 fields=('name', 'measurement_unit'),
