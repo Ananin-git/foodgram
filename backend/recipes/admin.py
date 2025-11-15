@@ -117,7 +117,8 @@ class RecipeAdmin(admin.ModelAdmin):
     def get_image(self, recipe):
         return (
             mark_safe(f'<img src="{recipe.image.url}" '
-                      f'style="max-width: 200px; max-height: 200px; " />')
+                      f'style="max-width: 200px; max-height: 200px; " />'
+                      )
             if recipe.image
             else ''
         )
