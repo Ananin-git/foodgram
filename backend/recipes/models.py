@@ -4,30 +4,39 @@ from django.db import models
 
 AMOUNT_MIN_VALUE = 1
 MIN_COOCKING_TIME = 1
+MAX_USERNAME_LENGTH = 150
+MAX_FIRST_NAME_LENGTH = 150
+MAX_LAST_NAME_LENGTH = 150
+MAX_EMAIL_LENGTH = 254
+MAX_INGREDIENT_NAME_LENGTH = 128
+MAX_MEASUREMENT_UNIT_LENGTH = 64
+MAX_TAG_NAME_LENGTH = 32
+MAX_TAG_SLUG_LENGTH = 32
+RECIPE_NAME_MAX_LENGTH = 256
 
 
 class User(AbstractUser):
     """Пользовательская модель."""
 
     username = models.CharField(
-        max_length=150,
+        max_length=MAX_USERNAME_LENGTH,
         unique=True,
         validators=(RegexValidator(regex=r'^[\w.@+-]+\Z'),),
         verbose_name='Никнейм',
     )
     first_name = models.CharField(
-        max_length=150,
+        max_length=MAX_FIRST_NAME_LENGTH,
         blank=False,
         verbose_name='Имя',
     )
     last_name = models.CharField(
-        max_length=150,
+        max_length=MAX_LAST_NAME_LENGTH,
         blank=False,
         verbose_name='Фамилия'
     )
     email = models.EmailField(
         unique=True,
-        max_length=254,
+        max_length=MAX_EMAIL_LENGTH,
         verbose_name='Электронная почта',
     )
     avatar = models.ImageField(
@@ -75,11 +84,11 @@ class Ingredient(models.Model):
     """Модель для хранения списка ингредиентов."""
 
     name = models.CharField(
-        max_length=128,
+        max_length=MAX_INGREDIENT_NAME_LENGTH,
         verbose_name='Название',
         help_text='Введите название')
     measurement_unit = models.CharField(
-        max_length=64,
+        max_length=MAX_MEASUREMENT_UNIT_LENGTH,
         verbose_name='Ед. измерения',
         help_text='Введите название ед. измерения')
 
@@ -102,13 +111,13 @@ class Tag(models.Model):
     """Модель для хранения тегов."""
 
     name = models.CharField(
-        max_length=32,
+        max_length=MAX_TAG_NAME_LENGTH,
         unique=True,
         verbose_name='Название',
         help_text='Введите название'
     )
     slug = models.SlugField(
-        max_length=32,
+        max_length=MAX_TAG_SLUG_LENGTH,
         unique=True,
         verbose_name='Слаг',
         help_text='Введите слаг'
@@ -132,7 +141,7 @@ class Recipe(models.Model):
         verbose_name='Автор'
     )
     name = models.CharField(
-        max_length=256,
+        max_length=RECIPE_NAME_MAX_LENGTH,
         verbose_name='Название'
     )
     image = models.ImageField(
