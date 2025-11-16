@@ -1,8 +1,15 @@
 from djoser.serializers import UserSerializer
 from drf_extra_fields.fields import Base64ImageField
-from recipes.models import (FavoriteRecipes, Ingredient, Recipe,
-                            RecipeIngredient, ShoppingList, Subscriptions, Tag,
-                            User)
+from recipes.models import (
+    FavoriteRecipes,
+    Ingredient,
+    Recipe,
+    RecipeIngredient,
+    ShoppingList,
+    Subscriptions,
+    Tag,
+    User,
+)
 from rest_framework import serializers
 from rest_framework.exceptions import ValidationError
 
@@ -16,7 +23,7 @@ class FoodgramUserSerializer(UserSerializer):
 
     class Meta:
         model = User
-        fields = (*UserSerializer.Meta.fields, 'avatar', 'is_subscribed')
+        fields = '__all__'
 
     def get_is_subscribed(self, user):
         request = self.context.get('request')

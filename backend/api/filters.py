@@ -1,5 +1,6 @@
 import django_filters
 from django_filters.rest_framework import CharFilter, FilterSet
+
 from recipes.models import Ingredient, Recipe, Tag, User
 
 
@@ -29,7 +30,7 @@ class RecipeFilter(django_filters.FilterSet):
 
     class Meta:
         model = Recipe
-        fields = ['author', 'tags', 'is_in_shopping_cart', 'is_favorited']
+        fields = ('author', 'tags', 'is_in_shopping_cart', 'is_favorited')
 
     def filter_is_in_shopping_cart(self, recipes, name, value):
         if self.request.user.is_authenticated and value:
