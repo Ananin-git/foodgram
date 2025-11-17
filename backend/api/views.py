@@ -78,7 +78,7 @@ class RecipeViewSet(viewsets.ModelViewSet):
     def get_link(self, request, pk=None):
         if not Recipe.objects.filter(pk=pk).exists():
             raise ValidationError(
-                f'Рецепт с идентификатором {pk} не найден!'
+                f'Рецепт с идентификатором {pk} не найден.'
             )
         return Response({
             'short-link': f'http: //{request.get_host()}/s/{pk}'
