@@ -1,5 +1,9 @@
-from djoser.serializers import UserSerializer
 from drf_extra_fields.fields import Base64ImageField
+from rest_framework import serializers
+from rest_framework.exceptions import ValidationError
+
+from djoser.serializers import UserSerializer
+
 from recipes.models import (
     FavoriteRecipes,
     Ingredient,
@@ -10,8 +14,7 @@ from recipes.models import (
     Tag,
     User,
 )
-from rest_framework import serializers
-from rest_framework.exceptions import ValidationError
+
 
 MIN_AMOUNT = 1
 
@@ -199,15 +202,20 @@ class SubscriptionsSerializerFoodgram(FoodgramUserSerializer):
         )
 
     def get_recipes(self, author):
-        recipes_limit = self.context['request'].GET.get(
-            'recipes_limit', 10**10
-        )
-        try:
-            recipes_limit = int(recipes_limit)
-        except ValueError:
-            raise serializers.ValidationError(
-                {'limit': 'Параметр должен быть целым числом!'}
-            )
-        return RecipeMiniSerializer(
-            author.recipes.all()[:recipes_limit], many=True
-        ).data
+        recipes_limit_str = self.context['request'].GET.get('recipes_limit')
+        if recipes_limit_str is None:
+            queryset = author.recipes.all()
+        else:
+            try:
+                recipes_limit = int(recipes_limit_str)
+                if recipes_limit < 0:
+                    raise serializers.ValidationError(
+                        {'limit': 'Лимит не может быть отрицательным!'}
+                    )
+                queryset = author.recipes.all()[:recipes_limit]
+            except ValueError:
+                raise serializers.ValidationError(
+                    {'limit': 'Должен быть целым неотрицательным числом!'}
+                )
+
+        return RecipeMiniSerializer(queryset, many=True).data

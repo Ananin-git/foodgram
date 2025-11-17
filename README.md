@@ -1,6 +1,6 @@
 #  Социальная сеть для обмена рецептами приготовления еды Foodgram
 
-Адрес сайта: https://yp-foodgram.zapto.org/
+Адрес сайта: https://fogramopa.ddns.net/
 
 ## Описание проекта
 
