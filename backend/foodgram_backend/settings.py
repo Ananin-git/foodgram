@@ -4,33 +4,20 @@ from pathlib import Path
 from django.core.management.utils import get_random_secret_key
 from dotenv import load_dotenv
 
+load_dotenv()
 
-SETTINGS_DIR = Path(__file__).resolve().parent
-BASE_DIR = SETTINGS_DIR.parent
-PROJECT_ROOT_DIR = BASE_DIR.parent
 
-dotenv_path = os.path.join(PROJECT_ROOT_DIR, '.env')
-load_dotenv(dotenv_path=dotenv_path)
+BASE_DIR = Path(__file__).resolve().parent.parent
 
 SECRET_KEY = os.getenv('SECRET_KEY', get_random_secret_key())
 
-DEBUG = os.getenv('DEBUG', 'False').lower() in ('true', '1', 't')
+DEBUG = os.getenv('DEBUG', False)
 
-ALLOWED_HOSTS_STR = os.getenv('ALLOWED_HOSTS', '*')
-
-if ALLOWED_HOSTS_STR == '*':
-    ALLOWED_HOSTS = ['*']
-else:
-    ALLOWED_HOSTS = [host.strip() for host in ALLOWED_HOSTS_STR.split(',')]
-
-CORS_ALLOWED_ORIGINS = [
-    "https://fogramopa.ddns.net",
-]
+allowed_hosts_str = os.getenv('ALLOWED_HOSTS', '*')
+ALLOWED_HOSTS = [host.strip() for host in allowed_hosts_str.split(',') if host.strip()]
 
 CSRF_TRUSTED_ORIGINS = [
     "https://fogramopa.ddns.net",
-    "http://localhost:8000",
-    "http://127.0.0.1:8000",
 ]
 
 INSTALLED_APPS = [
@@ -70,8 +57,8 @@ AUTH_USER_MODEL = 'recipes.User'
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
-    'corsheaders.middleware.CorsMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
