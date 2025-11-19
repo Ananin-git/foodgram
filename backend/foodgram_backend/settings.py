@@ -11,9 +11,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 SECRET_KEY = os.getenv('SECRET_KEY', get_random_secret_key())
 
-DEBUG = os.getenv('DEBUG', False)
+DEBUG = False
 
-allowed_hosts_str = os.getenv('ALLOWED_HOSTS', '*')
+allowed_hosts_str = ['84.201.162.229', 'localhost', '127.0.0.1', 'fogramopa.ddns.net']
 ALLOWED_HOSTS = [host.strip() for host in allowed_hosts_str.split(',') if host.strip()]
 
 CSRF_TRUSTED_ORIGINS = [
