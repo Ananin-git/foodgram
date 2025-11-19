@@ -22,6 +22,10 @@ if ALLOWED_HOSTS_STR == '*':
 else:
     ALLOWED_HOSTS = [host.strip() for host in ALLOWED_HOSTS_STR.split(',')]
 
+CORS_ALLOWED_ORIGINS = [
+    "https://fogramopa.ddns.net",
+]
+
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
