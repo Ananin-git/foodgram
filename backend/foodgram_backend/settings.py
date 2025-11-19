@@ -8,6 +8,7 @@ from dotenv import load_dotenv
 SETTINGS_DIR = Path(__file__).resolve().parent
 BASE_DIR = SETTINGS_DIR.parent
 PROJECT_ROOT_DIR = BASE_DIR.parent
+
 dotenv_path = os.path.join(PROJECT_ROOT_DIR, '.env')
 load_dotenv(dotenv_path=dotenv_path)
 
@@ -24,6 +25,12 @@ else:
 
 CORS_ALLOWED_ORIGINS = [
     "https://fogramopa.ddns.net",
+]
+
+CSRF_TRUSTED_ORIGINS = [
+    "https://fogramopa.ddns.net",
+    "http://localhost:8000",
+    "http://127.0.0.1:8000",
 ]
 
 INSTALLED_APPS = [
