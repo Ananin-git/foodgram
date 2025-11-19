@@ -13,8 +13,7 @@ SECRET_KEY = os.getenv('SECRET_KEY', get_random_secret_key())
 
 DEBUG = False
 
-allowed_hosts_str = ['84.201.162.229', 'localhost', '127.0.0.1', 'fogramopa.ddns.net']
-ALLOWED_HOSTS = [host.strip() for host in allowed_hosts_str.split(',') if host.strip()]
+ALLOWED_HOSTS = ['84.201.162.229', 'localhost', '127.0.0.1', 'fogramopa.ddns.net']
 
 CSRF_TRUSTED_ORIGINS = [
     "https://fogramopa.ddns.net",
