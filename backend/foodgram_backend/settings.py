@@ -14,7 +14,7 @@ SECRET_KEY = os.getenv('SECRET_KEY', get_random_secret_key())
 DEBUG = os.getenv('DEBUG', False)
 
 allowed_hosts_str = os.getenv('ALLOWED_HOSTS', '*')
-ALLOWED_HOSTS = [host.strip() for host in allowed_hosts_str.split(',') if host.strip()]
+ALLOWED_HOSTS = ['84.201.162.229', 'localhost', '127.0.0.1', 'fogramopa.ddns.net']
 
 INSTALLED_APPS = [
     'django.contrib.admin',
