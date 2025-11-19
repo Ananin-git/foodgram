@@ -9,18 +9,15 @@ load_dotenv()
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-dotenv_path = os.path.join(BASE_DIR, '.env')
-load_dotenv(dotenv_path=dotenv_path)
-
 SECRET_KEY = os.getenv('SECRET_KEY', get_random_secret_key())
 
 DEBUG = os.getenv('DEBUG', False)
 
-ALLOWED_HOSTS = os.getenv('ALLOWED_HOSTS', '*').split(',')
+ALLOWED_HOSTS = ['84.201.162.229', 'localhost', '127.0.0.1', 'fogramopa.ddns.net']
 
-CSRF_TRUSTED_ORIGINS = os.getenv(
-    'CSRF_TRUSTED_ORIGINS'
-).split(',')
+CSRF_TRUSTED_ORIGINS = [
+    "https://fogramopa.ddns.net",
+]
 
 INSTALLED_APPS = [
     'django.contrib.admin',
