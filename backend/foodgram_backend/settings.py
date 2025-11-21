@@ -11,12 +11,15 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 SECRET_KEY = os.getenv('SECRET_KEY', get_random_secret_key())
 
-DEBUG = False
+DEBUG = os.getenv('DEBUG', False)
 
-ALLOWED_HOSTS = ['84.201.162.229', 'localhost', '127.0.0.1', 'fogramopa.ddns.net']
+ALLOWED_HOSTS = [os.getenv('ALLOWED_HOSTS', '*').split(',')]
 
-CSRF_TRUSTED_ORIGINS_STR = os.getenv('CSRF_TRUSTED_ORIGINS', '')
-CSRF_TRUSTED_ORIGINS = [origin.strip() for origin in CSRF_TRUSTED_ORIGINS_STR.split(',') if origin.strip()]
+CSRF_TRUSTED_ORIGINS_STR = CSRF_TRUSTED_ORIGINS = ['https://fogramopa.ddns.net']
+
+SESSION_COOKIE_SECURE = True
+
+CSRF_COOKIE_SECURE = True
 
 INSTALLED_APPS = [
     'django.contrib.admin',
