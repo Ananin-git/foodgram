@@ -17,9 +17,9 @@ ALLOWED_HOSTS = [os.getenv('ALLOWED_HOSTS', '*').split(',')]
 
 CSRF_TRUSTED_ORIGINS_STR = ['https://fogramopa.ddns.net']
 
-SESSION_COOKIE_SECURE = True
-
-CSRF_COOKIE_SECURE = True
+CSRF_COOKIE_SECURE = os.getenv('CSRF_COOKIE_SECURE', 'False').lower() in ('true', '1', 't')
+SESSION_COOKIE_SECURE = os.getenv('SESSION_COOKIE_SECURE', 'False').lower() in ('true', '1', 't')
+CSRF_COOKIE_HTTPONLY = os.getenv('CSRF_COOKIE_HTTPONLY', 'False').lower() in ('true', '1', 't')
 
 INSTALLED_APPS = [
     'django.contrib.admin',
