@@ -15,7 +15,7 @@ DEBUG = os.getenv('DEBUG', False)
 
 ALLOWED_HOSTS = [os.getenv('ALLOWED_HOSTS', '*').split(',')]
 
-CSRF_TRUSTED_ORIGINS_STR = CSRF_TRUSTED_ORIGINS = ['https://fogramopa.ddns.net']
+CSRF_TRUSTED_ORIGINS_STR = ['https://fogramopa.ddns.net']
 
 SESSION_COOKIE_SECURE = True
 
